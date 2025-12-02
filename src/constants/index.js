@@ -227,7 +227,7 @@ export const myProjects = [
 export const mySocials = [
   {
     name: "Github",
-    href: "https://github.com/Sathya6862",
+    href: "https://github.com/SATHYA-SAI-R",
     icon: "/assets/socials/github-opened-svgrepo-com.svg",
   },
   {
