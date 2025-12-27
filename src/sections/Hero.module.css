@@ -1,115 +1,368 @@
-
-.splineTint {
-  filter: brightness(1.2) saturate(1.3) hue-rotate(-15deg);
-}
-
-
+/* ===== GLOBAL ===== */
 body {
   overflow: auto;
 }
-
 body::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 
+/* ================= HERO BASE ================= */
 
 .heroContainer {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 100vh;
-  width: 100vw;
-  overflow: hidden;
   position: relative;
-  padding: 0;
 
-  /* ✅ Gradient background */
-  background: linear-gradient(180deg, #524bff 0%, #05081b 85%);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 
-  /* ✅ Optional: make colors render consistently */
-  color-scheme: light;
+  min-height: 100vh;
+  padding: 5rem 1.5rem 3rem;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(180deg, #524bff 0%, #05081b 80%);
   -webkit-font-smoothing: antialiased;
 }
 
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
 
-.heroTitle{
-  margin-top: -10%;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2.5rem;
 }
 
-
-
-@media (min-width: 1280px) {
-  .heroContainer {
-    flex-direction: row;
-    padding: 0 3rem; /* More padding for desktop */
-    margin-left: -10%;
-  }
+.mobileIntro,
+.mobileActions,
+.scrollIndicator {
+  display: none;
 }
+
+/* ================= LEFT (TEXT) ================= */
 
 .heroLeft {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 0%;
   z-index: 2;
 }
 
 .heroTitle {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  z-index: 10;
-}
-
-@media (min-width: 768px) {
-  .heroTitle {
-    font-size: 4rem;
-  }
-  
-}
-
-@media (min-width: 1024px) {
-  .heroTitle {
-    font-size: 5rem;
-  }
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: #f9fafb;
 }
 
 .heroDesc {
-  font-size: 1.2rem;
-  color: #c9a7f7;
-  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 34rem;
+  color: #e5e7eb;
 }
+
+/* ================= RIGHT (SPLINE) ================= */
 
 .heroRight {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
 }
 
 .splineWrapper {
   width: 100%;
-  max-width: 600px;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
 }
 
-@media (min-width: 768px) {
-  .splineWrapper {
-    height: 500px;
+.splineCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 767px) {
+  .heroRight {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .heroContainer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobileIntro {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f9fafb;
+    opacity: 0.95;
+  }
+
+  .mobileIntro strong {
+    font-weight: 800;
+  }
+
+  .heroContainer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #524bff, #6b66ff, #05081b, #3f3cff);
+    background-size: 400% 400%;
+    animation: mobileGradient 10s ease infinite;
+    z-index: 0;
+  }
+
+    /* ⭐ subtle animated stars (mobile only) */
+    /* ⭐ brighter & slightly bigger animated stars (mobile only) */
+  .heroContainer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.6px 1.6px at 12% 18%, rgba(255,255,255,0.85), transparent),
+      radial-gradient(1.5px 1.5px at 28% 72%, rgba(220,230,255,0.75), transparent),
+      radial-gradient(1.7px 1.7px at 46% 38%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1.5px 1.5px at 64% 58%, rgba(200,210,255,0.7), transparent),
+      radial-gradient(1.6px 1.6px at 82% 26%, rgba(255,255,255,0.8), transparent);
+    background-size: 220px 220px;
+    background-repeat: repeat;
+    animation: mobileStarsMove 45s linear infinite;
+    opacity: 0.75;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+
+
+  .heroInner {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes mobileGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+  
+}
+@keyframes mobileStarsMove {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-220px);
+  }
+}
+
+
+@media (max-width: 767px) {
+  .heroLeft {
+    align-items: center;
+    text-align: center;
+  }
+
+  .heroTitle {
+    font-size: 2.4rem;
+    line-height: 1.15;
+  }
+
+  .heroDesc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 28rem;
+    margin-top: 0.6rem;
+  }
+
+  .heroSubline {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    letter-spacing: 0.02em;
+  }
+
+   /* buttons */
+  .mobileActions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .mobileBtn {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #05081b;
+    background: #ffffff;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+
+  .mobileBtnOutline {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+
+  /* scroll indicator */
+  .scrollIndicator {
+    display: block;
+    margin-top: 2.2rem;
+    font-size: 1.4rem;
+    opacity: 0.6;
+    animation: scrollBounce 1.6s infinite;
   }
   
 }
 
-@media (min-width: 1280px) {
+
+  
+
+
+/* ================= TABLET ================= */
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .heroInner {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .heroLeft {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .heroTitle {
+    font-size: 3.2rem;
+  }
+
+  .heroDesc {
+    font-size: 1.05rem;
+  }
+
   .splineWrapper {
-    height: 600px;
+    max-width: 420px;
+  }
+  .mobileIntro {
+    display: none;
   }
 }
 
+/* ================= DESKTOP / LAPTOP ================= */
+
+@media (min-width: 1080px) {
+  .heroContainer {
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .heroInner {
+    max-width: 1350px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+
+    /* ✅ SINGLE vertical control point */
+    padding-top: 0;
+  }
+
+  /* TEXT */
+  .heroLeft {
+    flex: 0 0 35%;
+    max-width: 35%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    /* 🔥 precise visual alignment */
+    transform: translate(-2.5rem, 0.5rem);
+  }
+
+  .heroTitle {
+    font-size: 6rem;
+    line-height: 1.05;
+    max-width: 13ch;
+    margin-bottom: 0.6rem;
+  }
+
+  .heroDesc {
+    margin-top: 0.6rem;
+    letter-spacing: -0.01em;
+
+    /* 🔥 THIS is what makes it match the image */
+    width: 42ch;
+    flex-shrink: 0;
+    font-size: 1.35rem;
+    line-height: 1.6;
+
+    color: #e5e7eb;
+    text-align: left;
+  }
+
+  .mobileIntro {
+    display: none;
+  }
+
+  /* SPLINE */
+  .heroRight {
+    flex: 0 0 65%;
+    max-width: 65%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .splineWrapper {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    transform: translate(8.5rem, -1.5rem);
+  }
+}
+
+/* ================= VERY WIDE ================= */
+
+@media (min-width: 1440px) {
+  .heroContainer {
+    overflow: hidden;
+  }
+  .heroInner {
+    max-width: 1300px;
+    gap: 3.8rem;
+  }
+  .splineCanvas {
+    transform: rotate(200deg);
+  }
+  .mobileIntro {
+  display: none;
+}
+}

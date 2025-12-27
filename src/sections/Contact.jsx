@@ -51,7 +51,7 @@ const Contact = () => {
           name: formData.name,      // Matches {{name}}
           to_name: "Sathya",
           email: formData.email,    // <--- THIS WAS THE FIX: 'email' matches {{email}}
-          to_email: "sathyasai.8225@gmail.com",
+          to_email: "codebackup.2005@gmail.com",
           message: formData.message,  // Matches {{message}}
         },
         // 5. 4th ARGUMENT IS CORRECTLY DELETED
