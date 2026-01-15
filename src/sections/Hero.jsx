@@ -8,11 +8,22 @@ const Hero = () => {
       <div className={styles.heroInner}>
         {/* LEFT: TEXT */}
         <div className={styles.heroLeft}>
-          {/* MOBILE INTRO — mobile only via CSS */}
-          <span className={styles.mobileIntro}>
+          {/* MOBILE INTRO */}
+          <motion.span
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 40,
+              damping: 20,
+              delay: 0.6,
+            }}
+            className={styles.mobileIntro}
+          >
             Hi, I am <strong>Sathya Sai</strong>
-          </span>
+          </motion.span>
 
+          {/* MAIN TITLE */}
           <motion.h1
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
@@ -28,7 +39,7 @@ const Hero = () => {
             Building Fast <br /> Reliable&nbsp;Results
           </motion.h1>
 
-          {/* 🔒 ORIGINAL PARAGRAPH — UNCHANGED */}
+          {/* DESCRIPTION */}
           <motion.p
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,32 +57,33 @@ const Hero = () => {
             communication, and a commitment to excellence.
           </motion.p>
 
-          {/* MOBILE ACTION BUTTONS — mobile only via CSS */}
-          <div className={styles.mobileActions}>
-            <a
-              href="https://www.linkedin.com/in/sathyasaikumar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.mobileBtn}
-            >
-              LinkedIn
+          {/* ACTION BUTTONS — SAME CONTAINER, SAME ANIMATION */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 40,
+              damping: 20,
+              delay: 2.2,
+            }}
+            className={styles.mobileActions}
+          >
+            <a href="#projects" className={styles.primaryPill}>
+              My Projects
             </a>
 
             <a
-              href="https://github.com/SATHYA-SAI-R"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.mobileBtnOutline}
+              href="/Sathya_Sai_CV.pdf"
+              download
+              className={styles.outlinePill}
             >
-              GitHub
+              Download CV
             </a>
-          </div>
+          </motion.div>
 
-          {/* SCROLL DOWN INDICATOR — mobile only */}
-          <div className={styles.scrollIndicator}>↓</div>
+          
         </div>
-
-        
 
         {/* RIGHT: SPLINE */}
         <div className={styles.heroRight}>
@@ -82,6 +94,58 @@ const Hero = () => {
             />
           </div>
         </div>
+      </div>
+      {/* SCROLL DOWN INDICATOR */}
+      <div className={styles.scrollExactWrapper}>
+        {/* Rotating text */}
+        <svg
+          className={styles.scrollTextSvg}
+          width="110"
+          height="110"
+          viewBox="0 0 140 140"
+        >
+          <defs>
+            <path
+              id="scrollCirclePath"
+              d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"
+            />
+          </defs>
+
+          <text className={styles.scrollExactText}>
+            <textPath href="#scrollCirclePath">
+              SCROLL DOWN • EXPLORE • MORE CONTENT •
+            </textPath>
+          </text>
+        </svg>
+
+        {/* STATIC ARROW */}
+        <svg
+          className={styles.scrollArrowSvg}
+          width="24"
+          height="36"
+          viewBox="0 0 24 36"
+        >
+          <line x1="12" y1="4" x2="12" y2="28" />
+          <polyline points="6,22 12,28 18,22" />
+        </svg>
+      </div>
+      {/* MOBILE SCROLL ARROW */}
+      <div className={styles.mobileScrollArrow}>
+        <svg
+          width="22"
+          height="14"
+          viewBox="0 0 22 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 2L11 12L20 2"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
     </section>
   );
