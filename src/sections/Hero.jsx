@@ -74,7 +74,7 @@ const Hero = () => {
             </a>
 
             <a
-              href="./public/assets/sathyasai_resume.pdf"
+              href="/assets/sathyasai_resume.pdf"
               download
               className={styles.outlinePill}
             >
