@@ -69,12 +69,12 @@ const Hero = () => {
             }}
             className={styles.mobileActions}
           >
-            <a href="#projects" className={styles.primaryPill}>
+            <a href="#work" className={styles.primaryPill}>
               My Projects
             </a>
 
             <a
-              href="/Sathya_Sai_CV.pdf"
+              href="./public/assets/sathyasai_resume.pdf"
               download
               className={styles.outlinePill}
             >
